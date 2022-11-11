@@ -1,0 +1,116 @@
+<app-header titulo="Articulo"></app-header>
+
+<ion-content class="ion-padding">
+  <ion-grid [fixed]="true">
+    <ion-row>
+      <ion-col size="12" sizeLg="6">
+        <h3>Datos principales del Articulo</h3>
+
+        <ion-item fill="outline">
+          <ion-label position="floating">Titulo</ion-label>
+          <ion-input placeholder="Introduce titulo"></ion-input>
+          <ion-note slot="error">Este campo es obligatorio</ion-note>
+        </ion-item>
+
+        <ion-item fill="outline">
+          <ion-label position="floating">Nombre de la revista</ion-label>
+          <ion-input placeholder="Ejemplo: Natural Science"></ion-input>
+          <ion-note slot="error">Este campo es obligatorio</ion-note>
+        </ion-item>
+
+        <ion-item fill="outline">
+          <ion-label position="floating">Autor(es)</ion-label>
+          <ion-input
+            placeholder="Ejemplo: Perez-Silva, Juan; Ramirez, Maria"
+          ></ion-input>
+          <ion-note slot="error">Este campo es obligatorio</ion-note>
+        </ion-item>
+
+        <!--ion-item>
+          <ion-item>
+            <ion-label>Pizza</ion-label>
+            <ion-select
+              value="peperoni"
+              multiple="true"
+              placeholder="Select Pizza"
+            >
+              <ion-select-option value="peperoni">Peperoni</ion-select-option>
+              <ion-select-option value="hawaii">Hawaii</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-item-->
+
+        <ion-item counter="true">
+          <ion-label position="floating">Resumen</ion-label>
+          <ion-input maxlength="250"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12" sizeLg="6">
+        <h3>Area, sector y disciplina del articulo</h3>
+
+        <ion-item>
+          <ion-label>Sector estrategico</ion-label>
+          <ion-select
+            value="admin"
+            multiple="true"
+            placeholder="Seleccione un sector estrategico"
+          >
+            <ion-select-option value="admin">Administracion</ion-select-option>
+            <ion-select-option value="alim">Alimentos</ion-select-option>
+            <ion-select-option value="manu">Manufactura</ion-select-option>
+            <ion-select-option value="amb">Medio Ambiente</ion-select-option>
+            <ion-select-option value="peda">Pedagogia</ion-select-option>
+
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Area prioritaria</ion-label>
+          <ion-select
+            value="salud"
+            multiple="true"
+            placeholder="Selecciona un area prioritaria"
+          >
+            <ion-select-option value="salud">Salud</ion-select-option>
+            <ion-select-option value="quim">Quimica</ion-select-option>
+            <ion-select-option value="meca">Mecanica</ion-select-option>
+            <ion-select-option value="elec">Electrica</ion-select-option>
+            <ion-select-option value="bioq">Bioquimica</ion-select-option>
+            <ion-select-option value="compu">Computacion</ion-select-option>
+            <ion-select-option value="agro">Agropecuarias</ion-select-option>
+            <ion-select-option value="admin">Administracion</ion-select-option>
+
+
+          </ion-select>
+        </ion-item>
+
+      </ion-col>
+
+      <ion-col size="12" sizeLg="6">
+        <h3>Datos complementarios</h3>
+
+        <ion-item>
+          <ion-label>Tipo de articulo</ion-label>
+          <ion-select
+            value="div"
+            multiple="true"
+            placeholder="Tipo de art."
+          >
+            <ion-select-option value="div">Divulgacion</ion-select-option>
+            <ion-select-option value="arb">Arbitrado</ion-select-option>
+            <ion-select-option value="indx">Indexado</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item fill="outline">
+          <ion-label position="floating">ISSN</ion-label>
+          <ion-note slot="error">Este campo es obligatorio</ion-note>
+        </ion-item>
+
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
