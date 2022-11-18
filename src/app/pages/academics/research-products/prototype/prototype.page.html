@@ -1,0 +1,243 @@
+<app-header titulo="Prototipo"></app-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="datos">
+    <fieldset >
+      <legend><h3>Datos principales del Prototipo</h3></legend>
+      
+      <ion-item >
+        <ion-label position="floating">Nombre del Prototipo<ion-text color="danger">*</ion-text>:</ion-label>
+        <ion-input placeholder="Nombre del prototipo"></ion-input>
+        <ion-note slot="error">Este campo es obligatorio</ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Propósito<ion-text color="danger">*</ion-text>:</ion-label>
+        <ion-select value="admin" multiple="true" placeholder="Seleccione un propósito">
+          <ion-select-option value="5">Asimilación de Tecnología</ion-select-option>
+          <ion-select-option value="1">Creación</ion-select-option>
+          <ion-select-option value="4">Desarrollo Tecnológico</ion-select-option>
+          <ion-select-option value="2">Difusión</ion-select-option>
+          <ion-select-option value="6">Generación de Conocimiento</ion-select-option>
+          <ion-select-option value="3">Investigación Aplicada</ion-select-option>
+          <ion-select-option value="7">Transferencia de Tecnología</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item >
+        <ion-label position="floating">Nombre de Institución de Creación del Prototipo<ion-text color="danger">*</ion-text>:</ion-label>
+        <ion-input placeholder="Nombre completo de la Institución(es) donde se creó el prototipo"></ion-input>
+        <ion-note slot="error">Este campo es obligatorio</ion-note>
+      </ion-item>
+
+      <ion-item >
+        <ion-label position="floating">Autor(es)<ion-text color="danger">*</ion-text>:</ion-label>
+        <ion-input placeholder="Primer Apellido"></ion-input>
+        <ion-input placeholder="Segundo Apellido"></ion-input>
+        <ion-input placeholder="Nombres"></ion-input>
+        <ion-select value="admin" multiple="true" placeholder="Posición del autor">
+          <ion-select-option value="1">1er Autor</ion-select-option>
+          <ion-select-option value="2">2do Autor</ion-select-option>
+          <ion-select-option value="3">3er Autor</ion-select-option>
+          <ion-select-option value="4">4to Autor</ion-select-option>
+          <ion-select-option value="5">5to Autor en Adelante</ion-select-option>
+        </ion-select>
+        <ion-button>
+          <ion-icon name="add-outline"></ion-icon>Agregar
+        </ion-button>
+        <ion-input placeholder="Autor(es)" value="" [readonly]="true"></ion-input>
+        <ion-note slot="error">Este campo es obligatorio</ion-note>        
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Descripción<ion-text color="danger">*</ion-text>:</ion-label>
+        <ion-textarea placeholder="Descripción general de lo que es el prototipo" [autoGrow]="true"></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Objetivo<ion-text color="danger">*</ion-text>:</ion-label>
+        <ion-textarea placeholder="¿Cual es el objetivo por el cual se creó el prototipo?" [autoGrow]="true"></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Características<ion-text color="danger">*</ion-text>:</ion-label>
+        <ion-textarea placeholder="¿Qué características componen al prototipo? ¿Cuales son sus limitaciones?" [autoGrow]="true"></ion-textarea>
+      </ion-item>
+
+    </fieldset>
+
+    <fieldset >
+      <legend><h3>Área, Sector y Disciplina del Prototipo</h3></legend>
+
+      <ion-item>
+        <ion-label>Sector estratégico<ion-text color="danger">*</ion-text>:</ion-label>
+        <ion-select value="admin" multiple="true" placeholder="Seleccione un sector estratégico">
+          <ion-select-option value="">[Seleccione un Tipo]</ion-select-option>
+          <ion-select-option value="1">Arquitectónico</ion-select-option>
+          <ion-select-option value="2">Programa de Cómputo</ion-select-option>
+          <ion-select-option value="3">Diseño Industrial</ion-select-option>
+          <ion-select-option value="4">Desarrollo Industrial</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Subsector estratégico<ion-text color="danger">*</ion-text>:</ion-label>
+        <ion-select value="admin" multiple="true" placeholder="Seleccione un subsector estratégico">
+          <ion-select-option value="">[Seleccione un Tipo]</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Área prioritaria del país<ion-text color="danger">*</ion-text>:</ion-label>
+        <ion-select value="admin" multiple="true" placeholder="Seleccione un área prioritaria del país">
+          <ion-select-option value="">[Seleccione un Tipo]</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+    </fieldset>
+
+    <fieldset >
+      <legend><h3>Datos Complementarios</h3></legend>
+
+      <ion-item>
+        <ion-label>Tipo de prototipo<ion-text color="danger">*</ion-text>:</ion-label>
+        <ion-select value="admin" multiple="true" placeholder="Seleccione tipo de prototipo">
+          <ion-select-option value="">[Seleccione un Tipo]</ion-select-option>
+          <ion-select-option value="1">Arquitectónico</ion-select-option>
+          <ion-select-option value="2">Programa de Cómputo</ion-select-option>
+          <ion-select-option value="3">Diseño Industrial</ion-select-option>
+          <ion-select-option value="4">Desarrollo Industrial</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Fecha de publicación<ion-text color="danger">*</ion-text>:</ion-label>
+        <ion-input placeholder="Seleccione Fecha de publicación"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>País de publicación<ion-text color="danger">*</ion-text>:</ion-label>
+        <ion-select value="admin" multiple="true" placeholder="Seleccione tipo de prototipo">
+          <ion-select-option value="">[Seleccione un Tipo]</ion-select-option>
+          <ion-select-option value="248">Åland</ion-select-option>
+          <ion-select-option value="8">Albania</ion-select-option>
+          <ion-select-option value="276">Alemania</ion-select-option>
+          <ion-select-option value="20">Andorra</ion-select-option>
+          <ion-select-option value="24">Angola</ion-select-option>
+          <ion-select-option value="660">Anguila</ion-select-option>
+          <ion-select-option value="10">Antártida</ion-select-option>
+          <ion-select-option value="28">Antigua y Barbuda</ion-select-option>
+          <ion-select-option value="682">Arabia Saudita</ion-select-option>
+          <ion-select-option value="12">Argelia</ion-select-option>
+          <ion-select-option value="32">Argentina</ion-select-option>
+          <ion-select-option value="51">Armenia</ion-select-option>
+          <ion-select-option value="533">Aruba</ion-select-option>
+          <ion-select-option value="36">Australia</ion-select-option>
+          <ion-select-option value="40">Austria</ion-select-option>
+          <ion-select-option value="31">Azerbaiyán</ion-select-option>
+          <ion-select-option value="44">Bahamas</ion-select-option>
+          <ion-select-option value="50">Bangladés</ion-select-option>
+          <ion-select-option value="52">Barbados</ion-select-option>
+          <ion-select-option value="48">Baréin</ion-select-option>
+          <ion-select-option value="56">Bélgica</ion-select-option>
+          <ion-select-option value="84">Belice</ion-select-option>
+          <ion-select-option value="204">Benín</ion-select-option>
+          <ion-select-option value="60">Bermudas</ion-select-option>
+          <ion-select-option value="112">Bielorrusia</ion-select-option>
+          <ion-select-option value="68">Bolivia</ion-select-option>
+          <ion-select-option value="70">Bosnia y Herzegovina</ion-select-option>
+          <ion-select-option value="72">Botsuana</ion-select-option>
+          <ion-select-option value="76">Brasil</ion-select-option>
+          <ion-select-option value="96">Brunéi</ion-select-option>
+          <ion-select-option value="100">Bulgaria</ion-select-option>
+          <ion-select-option value="854">Burkina Faso</ion-select-option>
+          <ion-select-option value="108">Burundi</ion-select-option>
+          <ion-select-option value="64">Bután</ion-select-option>
+          <ion-select-option value="132">Cabo Verde</ion-select-option>
+          <ion-select-option value="116">Camboya</ion-select-option>
+          <ion-select-option value="120">Camerún</ion-select-option>
+          <ion-select-option value="124">Canadá</ion-select-option>
+          <ion-select-option value="535">Caribe Neerlandés</ion-select-option>
+          <ion-select-option value="634">Catar</ion-select-option>
+          <ion-select-option value="148">Chad</ion-select-option>
+          <ion-select-option value="152">Chile</ion-select-option>
+          <ion-select-option value="156">China</ion-select-option>
+          <ion-select-option value="196">Chipre</ion-select-option>
+          <ion-select-option value="336">Ciudad del Vaticano</ion-select-option>
+          <ion-select-option value="170">Colombia</ion-select-option>
+          <ion-select-option value="174">Comoras</ion-select-option>
+          <ion-select-option value="408">Corea del Norte</ion-select-option>
+          <ion-select-option value="410">Corea del Sur</ion-select-option>
+          <ion-select-option value="384">Costa de Marfil</ion-select-option>
+          <ion-select-option value="188">Costa Rica</ion-select-option>
+          <ion-select-option value="191">Croacia</ion-select-option>
+          <ion-select-option value="192">Cuba</ion-select-option>
+          <ion-select-option value="531">Curazao</ion-select-option>
+          <ion-select-option value="208">Dinamarca</ion-select-option>
+          <ion-select-option value="212">Dominica</ion-select-option>
+          <ion-select-option value="218">Ecuador</ion-select-option>
+          <ion-select-option value="818">Egipto</ion-select-option>
+          <ion-select-option value="222">El Salvador</ion-select-option>
+          <ion-select-option value="784">Emiratos Árabes Unidos</ion-select-option>
+          <ion-select-option value="232">Eritrea</ion-select-option>
+          <ion-select-option value="703">Eslovaquia</ion-select-option>
+          <ion-select-option value="705">Eslovenia</ion-select-option>
+          <ion-select-option value="724">España</ion-select-option>
+          <ion-select-option value="840">Estados Unidos</ion-select-option>
+          <ion-select-option value="233">Estonia</ion-select-option>
+          <ion-select-option value="231">Etiopía</ion-select-option>
+          <ion-select-option value="608">Filipinas</ion-select-option>
+          <ion-select-option value="246">Finlandia</ion-select-option>
+          <ion-select-option value="242">Fiyi</ion-select-option>
+          <ion-select-option value="250">Francia</ion-select-option>
+          <ion-select-option value="266">Gabón</ion-select-option>
+          <ion-select-option value="270">Gambia</ion-select-option>
+          <ion-select-option value="268">Georgia</ion-select-option>
+          <ion-select-option value="288">Ghana</ion-select-option>
+          <ion-select-option value="292">Gibraltar</ion-select-option>
+          <ion-select-option value="308">Granada</ion-select-option>
+          <ion-select-option value="300">Grecia</ion-select-option>
+          <ion-select-option value="304">Groenlandia</ion-select-option>
+          <ion-select-option value="312">Guadalupe</ion-select-option>
+          <ion-select-option value="316">Guam</ion-select-option>
+          <ion-select-option value="320">Guatemala</ion-select-option>
+          <ion-select-option value="254">Guayana Francesa</ion-select-option>
+          <ion-select-option value="831">Guernsey</ion-select-option>
+          <ion-select-option value="324">Guinea</ion-select-option>
+          <ion-select-option value="226">Guinea Ecuatorial</ion-select-option>
+          <ion-select-option value="624">Guinea-Bisáu</ion-select-option>
+          <ion-select-option value="328">Guyana</ion-select-option>
+          <ion-select-option value="332">Haití</ion-select-option>
+          <ion-select-option value="340">Honduras</ion-select-option>
+          <ion-select-option value="344">Hong Kong</ion-select-option>
+          <ion-select-option value="348">Hungría</ion-select-option>
+          <ion-select-option value="356">India</ion-select-option>
+          <ion-select-option value="360">Indonesia</ion-select-option>
+          <ion-select-option value="368">Irak</ion-select-option>
+          <ion-select-option value="364">Irán</ion-select-option>
+          <ion-select-option value="372">Irlanda</ion-select-option>
+          <ion-select-option value="74">Isla Bouvet</ion-select-option>
+          <ion-select-option value="833">Isla de Man</ion-select-option>
+          <ion-select-option value="162">Isla de Navidad</ion-select-option>
+          <ion-select-option value="352">Islandia</ion-select-option>
+          <ion-select-option value="136">Islas Caimán</ion-select-option>
+          <ion-select-option value="166">Islas Cocos</ion-select-option>
+          <ion-select-option value="184">Islas Cook</ion-select-option>
+          <ion-select-option value="234">Islas Feroe</ion-select-option>
+          <ion-select-option value="239">Islas Georgias del Sur y Sandwich del Sur</ion-select-option>
+          <ion-select-option value="334">Islas Heard y McDonald</ion-select-option>
+          <ion-select-option value="238">Islas Malvinas</ion-select-option>
+          <ion-select-option value="580">Islas Marianas del Norte</ion-select-option>
+          <ion-select-option value="584">Islas Marshall</ion-select-option>
+          <ion-select-option value="612">Islas Pitcairn</ion-select-option>
+          <ion-select-option value="90">Islas Salomón</ion-select-option>
+          <ion-select-option value="796">Islas Turcas y Caicos</ion-select-option>
+          <ion-select-option value="581">Islas ultramarinas de Estados</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+    </fieldset>
+  </form>
+</ion-content>
+
+
