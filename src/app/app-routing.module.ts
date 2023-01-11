@@ -22,6 +22,10 @@ const routes: Routes = [
   {
     path: 'interships',
     loadChildren: () => import('./pages/academics/interships/interships.module').then( m => m.IntershipsPageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   }
 ];
 
