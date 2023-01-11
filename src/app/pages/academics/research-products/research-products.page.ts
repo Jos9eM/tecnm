@@ -66,7 +66,7 @@ export class ResearchProductsPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.nextProjects();
+    this.nextProjects(null, true);
   }
 
   callFunction(route: string) {
@@ -84,7 +84,7 @@ export class ResearchProductsPage implements OnInit {
 
   nextProjects(event?, pull: boolean = false) {
     this.projectService.getProjects(pull).subscribe((response) => {
-      //console.log(response);
+      console.log(response);
       this.projects.push(...response.projects);
 
       if (event) {

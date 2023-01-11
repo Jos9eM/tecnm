@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { IonSlides } from '@ionic/angular';
+import { IonSlides, NavController } from '@ionic/angular';
+import { User } from 'src/app/interfaces/interfaces';
+import { UiServices } from 'src/app/services/ui-services.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -10,61 +13,57 @@ import { IonSlides } from '@ionic/angular';
 export class LoginPage implements OnInit {
   @ViewChild('mainSlide') slides: IonSlides;
 
-  avatars = [
-    {
-      img: 'av-1.png',
-      seleccionado: true,
-    },
-    {
-      img: 'av-2.png',
-      seleccionado: false,
-    },
-    {
-      img: 'av-3.png',
-      seleccionado: false,
-    },
-    {
-      img: 'av-4.png',
-      seleccionado: false,
-    },
-    {
-      img: 'av-5.png',
-      seleccionado: false,
-    },
-    {
-      img: 'av-6.png',
-      seleccionado: false,
-    },
-    {
-      img: 'av-7.png',
-      seleccionado: false,
-    },
-    {
-      img: 'av-8.png',
-      seleccionado: false,
-    },
-  ];
-
-  avatarSlide = {
-    slidesPerView: 3,
+  loginUser = {
+    email: 'josue@mail.com',
+    password: '1234asdas5',
   };
 
-  constructor() {}
+  userRegister: User = {
+    email: 'test@mail.com',
+    name: 'test',
+    password: '12345',
+    avatar: 'av-1.png'
+  };
+
+  constructor(
+    private userService: UserService,
+    private navController: NavController,
+    private uiService: UiServices
+  ) {}
 
   ngOnInit() {
+    //this.slides.lockSwipes(true); //TODO fix error despues
   }
 
-  login(fLogin: NgForm) {
-    console.log(fLogin.valid);
+  async login(fLogin: NgForm) {
+    if (fLogin.invalid) {
+      return;
+    }
+
+    const valid = await this.userService.login(
+      this.loginUser.email,
+      this.loginUser.password
+    );
+
+    if (valid) {
+      this.navController.navigateRoot('/home', { animated: true });
+    } else {
+      this.uiService.presentAlert('Usuario/contraseña no son correctos');
+    }
   }
 
-  register(fRegister: NgForm) {
-    console.log(fRegister.valid);
-  }
+  async register(fRegister: NgForm) {
+    if (fRegister.invalid) {
+      return;
+    }
 
-  avatarClick(avatar) {
-    this.avatars.forEach((av) => (av.seleccionado = false));
-    avatar.seleccionado = true;
+    const valid = await this.userService.register(this.userRegister);
+
+    if (valid) {
+      this.navController.navigateRoot('/home', { animated: true });
+    } else {
+      this.uiService.presentAlert('Usuario no es valido');
+    }
   }
 
   showRegister() {

@@ -1,14 +1,19 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>CVU TECNM</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="goProfile()" color="primary" fill="solid">
+        Perfil
+        <ion-icon slot="end" name="person-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let c of components"
-      [routerLink]="c.redirectTo">
-      <ion-icon [name] = c.icon slot="start" color="primary"></ion-icon>
+    <ion-item *ngFor="let c of components" [routerLink]="c.redirectTo">
+      <ion-icon [name]="c.icon" slot="start" color="primary"></ion-icon>
       {{c.name}}
     </ion-item>
   </ion-list>
