@@ -43,3 +43,9 @@ export interface User {
   avatar?: string;
   email?: string;
 }
+
+export interface ProjectType {
+  title: string;
+  icon: string;
+  redirectTo: string;
+}

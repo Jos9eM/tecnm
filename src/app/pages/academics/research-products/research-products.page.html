@@ -5,6 +5,7 @@
   <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
+
   <!-- Projects -->
   <app-projects [projects]="projects"></app-projects>
 
@@ -15,67 +16,20 @@
   >
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
-  <!-- Floating Btn -->
 
+  <!-- Floating Btn -->
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
     <ion-fab-button>
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
     <ion-fab-list side="top">
-      <ion-fab-button (click)="callFunction()" data-desc="Otro" color="primary">
-        <ion-icon name="diamond-outline"></ion-icon>
-      </ion-fab-button>
       <ion-fab-button
-        (click)="callFunction()"
-        data-desc="Tesis dirigida"
+        *ngFor="let b of buttons"
+        (click)="callFunction(b.redirectTo)"
+        [attr.data-desc]="b.title"
         color="primary"
       >
-        <ion-icon name="document-attach-outline"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-button
-        (click)="callFunction()"
-        data-desc="Prototipo"
-        color="primary"
-      >
-        <ion-icon name="construct-outline"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-button (click)="callFunction()" data-desc="IMPI" color="primary">
-        <ion-icon name="briefcase-outline"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-button
-        (click)="callFunction()"
-        data-desc="INDAutor"
-        color="primary"
-      >
-        <ion-icon name="document-lock-outline"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-button
-        (click)="callFunction()"
-        data-desc="Memoria"
-        color="primary"
-      >
-        <ion-icon name="albums-outline"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-button
-        (click)="callFunction()"
-        data-desc="Libro"
-        color="primary"
-      >
-        <ion-icon name="library-outline"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-button
-        (click)="callFunction()"
-        data-desc="Capitulo de Libro"
-        color="primary"
-      >
-        <ion-icon name="bookmark-outline"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-button
-        (click)="callFunction()"
-        data-desc="Articulo"
-        color="primary"
-      >
-        <ion-icon name="newspaper-outline"></ion-icon>
+        <ion-icon [name]="b.icon"></ion-icon>
       </ion-fab-button>
     </ion-fab-list>
   </ion-fab>

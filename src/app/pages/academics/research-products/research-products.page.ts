@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProjectsService } from 'src/app/services/projects.service';
-import { Project } from '../../../../app/interfaces/interfaces';
+import { Project, ProjectType } from '../../../../app/interfaces/interfaces';
 
 @Component({
   selector: 'app-research-products',
@@ -12,6 +12,54 @@ export class ResearchProductsPage implements OnInit {
   projects: Project[] = [];
   enabled = true;
 
+  buttons: ProjectType[] = [
+    {
+      title: 'Otro',
+      icon: 'diamond-outline',
+      redirectTo: '',
+    },
+    {
+      title: 'Tesis dirigida',
+      icon: 'document-attach-outline',
+      redirectTo: '',
+    },
+    {
+      title: 'Prototipo',
+      icon: 'construct-outline',
+      redirectTo: 'research-products/prototype',
+    },
+    {
+      title: 'IMPI',
+      icon: 'briefcase-outline',
+      redirectTo: '',
+    },
+    {
+      title: 'INDAutor',
+      icon: 'document-lock-outline',
+      redirectTo: '',
+    },
+    {
+      title: 'Memoria',
+      icon: 'albums-outline',
+      redirectTo: '',
+    },
+    {
+      title: 'Libro',
+      icon: 'library-outline',
+      redirectTo: '',
+    },
+    {
+      title: 'Capitulo de Libro',
+      icon: 'bookmark-outline',
+      redirectTo: '',
+    },
+    {
+      title: 'Articulo',
+      icon: 'newspaper-outline',
+      redirectTo: 'research-products/article',
+    },
+  ];
+
   constructor(
     private router: Router,
     private projectService: ProjectsService
@@ -21,12 +69,14 @@ export class ResearchProductsPage implements OnInit {
     this.nextProjects();
   }
 
-  callFunction() {
-    this.router.navigate(['research-products/article']);
+  callFunction(route: string) {
+    if(route.length > 0) {
+      this.router.navigate([route]);
+    }
     //console.log('button clicked');
   }
 
-  refresh(event?){
+  refresh(event?) {
     this.nextProjects(event, true);
     this.enabled = true;
     this.projects = [];
