@@ -5,19 +5,20 @@
     </ion-avatar>
 
     <ion-label>
-      <h3>{{ project.projectId }}</h3>
-      <h5>{{ project.authors }}</h5>
+      <h3><u>{{ project.projectId }}</u></h3>
+      <h5 class="top-10" >{{ project.authors }}</h5>
     </ion-label>
   </ion-item>
 
   <ion-item lines="none">
     <ion-label>
-      <ion-label text-wrap class="ion-text-justify" >{{project.title }}</ion-label>
-      <ion-label>{{project.porpouse}}</ion-label>
+      <ion-label text-wrap class="ion-text-justify top-10" >{{project.title }}</ion-label>
+      <ion-label class="ion-text-end top-10">{{project.date }}</ion-label>
+      <ion-label class="top-10" >{{project.porpouse}}</ion-label>
     </ion-label>
   </ion-item>
 
   <ion-item lines="none">
-    <ion-icon slot="end" color="primary" name="bookmark"></ion-icon>
+    <ion-icon slot="end" color="primary" name="create-outline"></ion-icon>
   </ion-item>
 </div>

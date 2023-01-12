@@ -1,7 +1,9 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+/* eslint-disable @typescript-eslint/dot-notation */
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { EventEmitter, Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ResponseProject, Project } from '../interfaces/interfaces';
+import { UserService } from './user.service';
 
 const URL = environment.url;
 
@@ -11,7 +13,9 @@ const URL = environment.url;
 export class ProjectsService {
   projectIndex = 0;
 
-  constructor(private http: HttpClient) {}
+  newProject = new EventEmitter<Project>();
+
+  constructor(private http: HttpClient, private userService: UserService) {}
 
   getProjects(pull: boolean = false) {
     if (pull) {
@@ -22,5 +26,26 @@ export class ProjectsService {
     return this.http.get<ResponseProject>(
       `${URL}/projects/?paginate=${this.projectIndex}`
     );
+  }
+
+  createProject(project: Project) {
+    const headers = new HttpHeaders({
+      'x-token': this.userService.token,
+    });
+
+    return new Promise((resolve) => {
+      this.http
+        .post(`${URL}/projects`, project, { headers })
+        .subscribe((res) => {
+          console.log(res);
+
+          if (res['ok']) {
+            this.newProject.emit(res['project']);
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        });
+    });
   }
 }

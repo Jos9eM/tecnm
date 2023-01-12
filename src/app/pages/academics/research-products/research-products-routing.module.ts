@@ -15,7 +15,11 @@ const routes: Routes = [
   {
     path: 'prototype',
     loadChildren: () => import('./prototype/prototype.module').then( m => m.PrototypePageModule)
+  },  {
+    path: 'impi',
+    loadChildren: () => import('./impi/impi.module').then( m => m.ImpiPageModule)
   }
+
 
 ];
 

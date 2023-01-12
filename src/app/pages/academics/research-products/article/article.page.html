@@ -1,116 +1,451 @@
 <app-header titulo="Articulo"></app-header>
 
 <ion-content class="ion-padding">
-  <ion-grid [fixed]="true">
-    <ion-row>
-      <ion-col size="12" sizeLg="6">
-        <h3>Datos principales del Articulo</h3>
+  <ion-grid>
+    <form (ngSubmit)="createProject(fCreate)" #fCreate="ngForm" novalidate>
+      <ion-row>
+        <!-- Datos Generales Articulo -->
+        <ion-col
+          size="12"
+          sizeXl="4"
+          sizeLg="6"
+          sizeMd="6"
+          sizeSm="12"
+          sizeXs="12"
+        >
+          <fieldset>
+            <legend>
+              <ion-label class="title" color="primary"
+                >Datos principales del Articulo</ion-label
+              >
+            </legend>
 
-        <ion-item fill="outline">
-          <ion-label position="floating">Titulo</ion-label>
-          <ion-input placeholder="Introduce titulo"></ion-input>
-          <ion-note slot="error">Este campo es obligatorio</ion-note>
-        </ion-item>
+            <ion-item fill="outline">
+              <ion-label position="floating"
+                >Titulo: <ion-text color="danger">*</ion-text></ion-label
+              >
+              <ion-input
+                placeholder="Introduce titulo"
+                name="title"
+                type="text"
+                required
+                [(ngModel)]="articleProject.title"
+              ></ion-input>
+              <ion-note slot="error">Este campo es obligatorio</ion-note>
+            </ion-item>
 
-        <ion-item fill="outline">
-          <ion-label position="floating">Nombre de la revista</ion-label>
-          <ion-input placeholder="Ejemplo: Natural Science"></ion-input>
-          <ion-note slot="error">Este campo es obligatorio</ion-note>
-        </ion-item>
+            <ion-item class="top-10" fill="outline">
+              <ion-label position="floating"
+                >Nombre de la revista:
+                <ion-text color="danger">*</ion-text></ion-label
+              >
+              <ion-input
+                placeholder="Ejemplo: Natural Science"
+                name="title"
+                type="text"
+                required
+                [(ngModel)]="articleProject.publisherName"
+              ></ion-input>
+              <ion-note slot="error">Este campo es obligatorio</ion-note>
+            </ion-item>
 
-        <ion-item fill="outline">
-          <ion-label position="floating">Autor(es)</ion-label>
-          <ion-input
-            placeholder="Ejemplo: Perez-Silva, Juan; Ramirez, Maria"
-          ></ion-input>
-          <ion-note slot="error">Este campo es obligatorio</ion-note>
-        </ion-item>
+            <ion-item class="top-10" fill="outline">
+              <ion-label position="floating"
+                >Autor(es): <ion-text color="danger">*</ion-text></ion-label
+              >
+              <ion-input
+                placeholder="Ejemplo: Perez-Silva, Juan; Ramirez, Maria"
+                name="authors"
+                type="text"
+                required
+                [(ngModel)]="articleProject.authors"
+              ></ion-input>
+              <ion-note slot="error">Este campo es obligatorio</ion-note>
+            </ion-item>
 
-        <!--ion-item>
-          <ion-item>
-            <ion-label>Pizza</ion-label>
-            <ion-select
-              value="peperoni"
-              multiple="true"
-              placeholder="Select Pizza"
+            <ion-label class="top-10 sizeFont"
+              >* Separar personas por ; (punto y coma)</ion-label
             >
-              <ion-select-option value="peperoni">Peperoni</ion-select-option>
-              <ion-select-option value="hawaii">Hawaii</ion-select-option>
-            </ion-select>
-          </ion-item>
-        </ion-item-->
 
-        <ion-item counter="true">
-          <ion-label position="floating">Resumen</ion-label>
-          <ion-input maxlength="250"></ion-input>
-        </ion-item>
-      </ion-col>
+            <ion-item class="top-20">
+              <ion-label
+                >Posición como autor:
+                <ion-text color="danger">*</ion-text></ion-label
+              >
+              <ion-select
+                required
+                multiple="false"
+                placeholder="Selecciona una opción"
+                (ionChange)="handleAuthorPos($event)"
+              >
+                <ion-select-option *ngFor="let a of authorPosMenu" [value]="a"
+                  >{{a}}</ion-select-option
+                >
+              </ion-select>
+            </ion-item>
 
-      <ion-col size="12" sizeLg="6">
-        <h3>Area, sector y disciplina del articulo</h3>
+            <ion-item class="top-10">
+              <ion-label
+                >Propósito: <ion-text color="danger">*</ion-text></ion-label
+              >
+              <ion-select
+                required
+                multiple="false"
+                placeholder="Selecciona un propósito"
+                (ionChange)="handlePorpouse($event)"
+              >
+                <ion-select-option *ngFor="let p of propouseMenu" [value]="p"
+                  >{{p}}</ion-select-option
+                >
+              </ion-select>
+            </ion-item>
 
-        <ion-item>
-          <ion-label>Sector estrategico</ion-label>
-          <ion-select
-            value="admin"
-            multiple="true"
-            placeholder="Seleccione un sector estrategico"
+            <ion-item text-wrap class="ion-text-justify top-20" counter="true">
+              <ion-label position="floating"
+                >Resumen: <ion-text color="danger">*</ion-text></ion-label
+              >
+              <ion-input
+                name="summary"
+                type="text"
+                required
+                maxlength="280"
+                [(ngModel)]="articleProject.summary"
+              ></ion-input>
+            </ion-item>
+
+            <ion-item class="top-20">
+              <ion-label
+                >Estado: <ion-text color="danger">*</ion-text></ion-label
+              >
+              <ion-select
+                multiple="false"
+                placeholder="Selecciona una opción"
+                required
+                (ionChange)="handleArticleState($event)"
+              >
+                <ion-select-option
+                  *ngFor="let a of articleStateMenu"
+                  [value]="a"
+                  >{{a}}</ion-select-option
+                >
+              </ion-select>
+            </ion-item>
+
+            <ion-item class="top-10">
+              <ion-label
+                >Fecha: <ion-text color="danger">*</ion-text></ion-label
+              >
+              <ion-input></ion-input>
+              <ion-popover trigger="date" size="cover">
+                <ion-datetime
+                  #date
+                  [showDefaultTitle]="true"
+                  presentation="date"
+                  displayFormat="DD MMM YY"
+                  [preferWheel]="true"
+                >
+                  <ion-buttons slot="buttons">
+                    <ion-button color="primary" (click)="date.confirm()"
+                      >Ok</ion-button
+                    >
+                    <ion-button color="primary" (click)="date.cancel()"
+                      >Cancel</ion-button
+                    >
+                  </ion-buttons></ion-datetime
+                >
+              </ion-popover>
+            </ion-item>
+
+            <ion-item class="top-10" fill="outline">
+              <ion-label position="floating"
+                >Casa editorial:
+                <ion-text color="danger">*</ion-text></ion-label
+              >
+              <ion-input
+                name="editorial"
+                type="text"
+                required
+                placeholder="Introduce casa editorial"
+                [(ngModel)]="articleProject.editorial"
+              ></ion-input>
+              <ion-note slot="error">Este campo es obligatorio</ion-note>
+            </ion-item>
+
+            <ion-item class="top-10">
+              <ion-label
+                >País de publicación:
+                <ion-text color="danger">*</ion-text></ion-label
+              >
+              <ion-select
+                required
+                value="México"
+                multiple="false"
+                placeholder="México"
+                (ionChange)="handleCountry($event)"
+              >
+                <ion-select-option *ngFor="let c of countriesMenu" [value]="c"
+                  >{{c}}</ion-select-option
+                >
+              </ion-select>
+            </ion-item>
+          </fieldset>
+        </ion-col>
+
+        <!-- Prioriti y Sector de Articulo -->
+        <!--app-sector></app-sector   TODO cuando se utilice el componente Sector-->
+        <ion-col
+          size="12"
+          sizeXl="4"
+          sizeLg="6"
+          sizeMd="6"
+          sizeSm="12"
+          sizeXs="12"
+          class="top-20"
+        >
+          <fieldset>
+            <legend>
+              <ion-label class="title" color="primary"
+                >Area, sector y disciplina del articulo</ion-label
+              >
+            </legend>
+
+            <ion-item>
+              <ion-label
+                >Sector estrategico:
+                <ion-text color="danger">*</ion-text></ion-label
+              >
+              <ion-select
+                (ionChange)="handleSector($event)"
+                multiple="false"
+                placeholder="Seleccione el sector estrategico"
+              >
+                <ion-select-option *ngFor="let s of sectorMenu" [value]="s"
+                  >{{ s }}</ion-select-option
+                >
+              </ion-select>
+            </ion-item>
+
+            <ion-item class="top-10">
+              <ion-label
+                >Subsector estrategico:
+                <ion-text color="danger">*</ion-text></ion-label
+              >
+              <ion-select
+                (ionChange)="handleSubSector($event)"
+                multiple="false"
+                placeholder="Selecciones subsector"
+              >
+                <ion-select-option *ngFor="let s of subSectorMenu" [value]="s"
+                  >{{ s }}</ion-select-option
+                >
+              </ion-select>
+            </ion-item>
+
+            <ion-item class="top-10">
+              <ion-label
+                >Area prioritaria del pais:
+                <ion-text color="danger">*</ion-text></ion-label
+              >
+              <ion-select
+                (ionChange)="handlePriority($event)"
+                multiple="false"
+                placeholder="Elija un area prioritaria"
+              >
+                <ion-select-option *ngFor="let p of prioriryMenu" [value]="p"
+                  >{{ p }}</ion-select-option
+                >
+              </ion-select>
+            </ion-item>
+
+            <ion-item class="top-10">
+              <ion-label
+                >Area del conocimiento:
+                <ion-text color="danger">*</ion-text></ion-label
+              >
+              <ion-select
+                (ionChange)="handleAcknowledgement($event)"
+                multiple="false"
+                placeholder="Elije un area del conocimiento"
+              >
+                <ion-select-option *ngFor="let a of acknowledgeMenu" [value]="a"
+                  >{{ a }}</ion-select-option
+                >
+              </ion-select>
+            </ion-item>
+          </fieldset>
+        </ion-col>
+
+        <!-- Datos Generales Articulo -->
+
+        <ion-col
+          size="12"
+          sizeXl="4"
+          sizeLg="6"
+          sizeMd="6"
+          sizeSm="12"
+          sizeXs="12"
+          class="top-20"
+        >
+          <fieldset>
+            <legend>
+              <ion-label class="title" color="primary"
+                >Datos complementarios</ion-label
+              >
+            </legend>
+
+            <ion-item>
+              <ion-label
+                >Tipo de articulo:
+                <ion-text color="danger">*</ion-text></ion-label
+              >
+              <ion-select
+                (ionChange)="handleArticleType($event)"
+                multiple="false"
+                placeholder="Elije un area del conocimiento"
+              >
+                <ion-select-option *ngFor="let p of projectMenu" [value]="p"
+                  >{{p}}</ion-select-option
+                >
+              </ion-select>
+            </ion-item>
+
+            <ion-row class="top-10">
+              <ion-col class="ion-text-start">
+                <ion-item float:left fill="outline">
+                  <ion-label position="floating"
+                    >De la pag: <ion-text color="danger">*</ion-text></ion-label
+                  >
+                  <ion-input
+                    name="initialPage"
+                    type="text"
+                    [(ngModel)]="articleProject.initialPage"
+                    maxlength="10"
+                    required="true"
+                  ></ion-input>
+                  <ion-note slot="error">Este campo es obligatorio</ion-note>
+                </ion-item>
+              </ion-col>
+
+              <ion-col class="ion-text-end">
+                <ion-item float:right fill="outline">
+                  <ion-label position="floating"
+                    >A la pag: <ion-text color="danger">*</ion-text></ion-label
+                  >
+                  <ion-input
+                    name="finalPage"
+                    type="text"
+                    [(ngModel)]="articleProject.finalPage"
+                    maxlength="10"
+                    required="true"
+                  ></ion-input>
+                  <ion-note slot="error">Este campo es obligatorio</ion-note>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+            <ion-row class="top-10">
+              <ion-col class="ion-text-start">
+                <ion-item float:left fill="outline">
+                  <ion-label position="floating"
+                    >Volumen: <ion-text color="danger">*</ion-text></ion-label
+                  >
+                  <ion-input
+                    name="volume"
+                    type="text"
+                    [(ngModel)]="articleProject.volume"
+                    maxlength="20"
+                    required="true"
+                  ></ion-input>
+                  <ion-note slot="error">Este campo es obligatorio</ion-note>
+                </ion-item>
+              </ion-col>
+
+              <ion-col class="ion-text-end">
+                <ion-item float:right fill="outline">
+                  <ion-label position="floating">ISSN:</ion-label>
+                  <ion-input
+                    name="issn"
+                    type="text"
+                    [(ngModel)]="articleProject.issn"
+                    maxlength="20"
+                  ></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+            <ion-item class="top-10" float:left fill="outline">
+              <ion-label position="floating">Indice(s) del registro:</ion-label>
+              <ion-input
+                name="registerIndex"
+                type="text"
+                [(ngModel)]="articleProject.registerIndex"
+                placeholder="Ejemplo: JRC; LATINDEX; EBSCO; CONACyT; etc"
+              ></ion-input>
+            </ion-item>
+
+            <ion-item class="top-10" float:left fill="outline">
+              <ion-label position="floating">Direccion electronica:</ion-label>
+              <ion-input
+                name="projectUrl"
+                type="text"
+                [(ngModel)]="articleProject.url"
+                placeholder="Direccion electronica donde se puede consultar la publicacion del articulo"
+              ></ion-input>
+            </ion-item>
+
+            <ion-item class="top-10" fill="outline">
+              <ion-row>
+                <ion-col class="ion-text-start">
+                  <ion-label position="floating"
+                    >Evidencia (Primera pagina del articulo):
+                    <ion-text color="danger">*</ion-text></ion-label
+                  >
+                </ion-col>
+                <ion-col class="ion-text-end">
+                  <ion-button
+                    class="top-10"
+                    (click)="createEvidence()"
+                    expand="block"
+                    fill="outline"
+                    shape="round"
+                  >
+                    Adjuntar
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-item>
+          </fieldset>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="top-20">
+        <ion-col class="ion-text-center" size="12">
+          <ion-button
+            [disabled]="(articleProject.authorPosition.length < 1 ||
+          articleProject.title.length < 1 ||
+          articleProject.publisherName.length < 1 ||
+          articleProject.summary.length < 1 ||
+          articleProject.authors.length < 1 ||
+          articleProject.editorial.length < 1 ||
+          articleProject.porpouse.length < 1 ||
+          articleProject.initialPage.length < 1 ||
+          articleProject.finalPage.length < 1 ||
+          articleProject.porpouse.length < 1 ||
+          articleProject.volume.length < 1 ||
+          articleProject.currentState.length < 1 ||
+          articleProject.sector.length < 1 ||
+          articleProject.subSector.length < 1 ||
+          articleProject.priority.length < 1 || 
+          articleProject.acknowledgement.length < 1 || 
+          articleProject.projectType.length < 1)"
+            type="submit"
+            color="primary"
+            shape="round"
           >
-            <ion-select-option value="admin">Administracion</ion-select-option>
-            <ion-select-option value="alim">Alimentos</ion-select-option>
-            <ion-select-option value="manu">Manufactura</ion-select-option>
-            <ion-select-option value="amb">Medio Ambiente</ion-select-option>
-            <ion-select-option value="peda">Pedagogia</ion-select-option>
-
-          </ion-select>
-        </ion-item>
-
-        <ion-item>
-          <ion-label>Area prioritaria</ion-label>
-          <ion-select
-            value="salud"
-            multiple="true"
-            placeholder="Selecciona un area prioritaria"
-          >
-            <ion-select-option value="salud">Salud</ion-select-option>
-            <ion-select-option value="quim">Quimica</ion-select-option>
-            <ion-select-option value="meca">Mecanica</ion-select-option>
-            <ion-select-option value="elec">Electrica</ion-select-option>
-            <ion-select-option value="bioq">Bioquimica</ion-select-option>
-            <ion-select-option value="compu">Computacion</ion-select-option>
-            <ion-select-option value="agro">Agropecuarias</ion-select-option>
-            <ion-select-option value="admin">Administracion</ion-select-option>
-
-
-          </ion-select>
-        </ion-item>
-
-      </ion-col>
-
-      <ion-col size="12" sizeLg="6">
-        <h3>Datos complementarios</h3>
-
-        <ion-item>
-          <ion-label>Tipo de articulo</ion-label>
-          <ion-select
-            value="div"
-            multiple="true"
-            placeholder="Tipo de art."
-          >
-            <ion-select-option value="div">Divulgacion</ion-select-option>
-            <ion-select-option value="arb">Arbitrado</ion-select-option>
-            <ion-select-option value="indx">Indexado</ion-select-option>
-          </ion-select>
-        </ion-item>
-
-        <ion-item fill="outline">
-          <ion-label position="floating">ISSN</ion-label>
-          <ion-note slot="error">Este campo es obligatorio</ion-note>
-        </ion-item>
-
-
-      </ion-col>
-    </ion-row>
+            Salvar registro
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
   </ion-grid>
-
 </ion-content>

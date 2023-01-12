@@ -12,7 +12,7 @@ const URL = environment.url;
 })
 export class UserService {
   token: string = null;
-  user: User = {};
+  private user: User = {};
 
   constructor(
     private http: HttpClient,
@@ -43,6 +43,27 @@ export class UserService {
           resolve(false);
         }
       });
+    });
+  }
+
+  //UPDATE USER
+  updateUser(user: User) {
+    const headers = new HttpHeaders({
+      'x-token': this.token,
+    });
+
+    return new Promise((resolve) => {
+      this.http
+        .post(`${URL}/user/update`, user, { headers })
+        .subscribe(async (res) => {
+          //console.log(res);
+          if (res['ok']) {
+            await this.saveToken(res['token']);
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        });
     });
   }
 
@@ -96,5 +117,13 @@ export class UserService {
         }
       });
     });
+  }
+
+  getUser() {
+    // eslint-disable-next-line no-underscore-dangle
+    if (!this.user._id) {
+      this.validateToken();
+    }
+    return { ...this.user };
   }
 }

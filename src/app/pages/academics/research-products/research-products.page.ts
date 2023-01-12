@@ -31,7 +31,7 @@ export class ResearchProductsPage implements OnInit {
     {
       title: 'IMPI',
       icon: 'briefcase-outline',
-      redirectTo: '',
+      redirectTo: 'research-products/impi',
     },
     {
       title: 'INDAutor',
@@ -67,10 +67,14 @@ export class ResearchProductsPage implements OnInit {
 
   ngOnInit() {
     this.nextProjects(null, true);
+
+    this.projectService.newProject.subscribe((project) => {
+      this.projects.unshift(project);
+    });
   }
 
   callFunction(route: string) {
-    if(route.length > 0) {
+    if (route.length > 0) {
       this.router.navigate([route]);
     }
     //console.log('button clicked');

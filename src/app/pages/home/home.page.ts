@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 interface Componente {
   icon: string;
@@ -12,25 +13,24 @@ interface Componente {
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-
   components: Componente[] = [
     {
       icon: 'library-outline',
       name: 'Productos de Investigacion',
-      redirectTo: '/research-products'
+      redirectTo: '/research-products',
     },
     {
       icon: 'people-circle-outline',
       name: 'Estancias',
-      redirectTo: '/interships'
-    }
+      redirectTo: '/interships',
+    },
   ];
 
-  constructor() { }
+  constructor(private router: Router) {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  goProfile() {
+    this.router.navigate(['/profile']);
   }
-
-  goProfile(){}
-
 }

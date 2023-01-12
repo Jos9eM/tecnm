@@ -1,0 +1,70 @@
+<ion-col
+  size="12"
+  sizeXl="4"
+  sizeLg="6"
+  sizeMd="6"
+  sizeSm="12"
+  sizeXs="12"
+  class="top-20"
+>
+  <fieldset>
+    <legend>
+      <ion-label class="title" color="primary"
+        >Area, sector y disciplina del articulo</ion-label
+      >
+    </legend>
+
+    <ion-item>
+      <ion-label
+        >Sector estrategico: <ion-text color="danger">*</ion-text></ion-label
+      >
+      <ion-select
+        (ionChange)="handleSector($event)"
+        multiple="false"
+        placeholder="Seleccione el sector estrategico"
+      >
+        <ion-select-option *ngFor="let s of sectorMenu" [value]="s">{{
+          s
+        }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item class="top-10">
+      <ion-label
+        >Subsector estrategico: <ion-text color="danger">*</ion-text></ion-label
+      >
+      <ion-select
+        (ionChange)="handleSubSector($event)"
+        multiple="false"
+        placeholder="Selecciones subsector"
+      >
+        <ion-select-option *ngFor="let s of subSectorMenu" [value]="s">{{
+          s
+        }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item class="top-10">
+      <ion-label
+        >Area prioritaria del pais:
+        <ion-text color="danger">*</ion-text></ion-label
+      >
+      <ion-select multiple="false" placeholder="Elija un area prioritaria">
+        <ion-select-option *ngFor="let p of prioriryMenu" [value]="p">{{
+          p
+        }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item class="top-10">
+      <ion-label
+        >Area del conocimiento: <ion-text color="danger">*</ion-text></ion-label
+      >
+      <ion-select multiple="false" placeholder="Elije un area del conocimiento">
+        <ion-select-option *ngFor="let a of acknowledgeMenu" [value]="a">{{
+          a
+        }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </fieldset>
+</ion-col>
