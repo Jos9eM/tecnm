@@ -17,14 +17,14 @@ export class ProjectsService {
 
   constructor(private http: HttpClient, private userService: UserService) {}
 
-  getProjects(pull: boolean = false) {
+  getProjects(pull: boolean = false, userId: string) {
     if (pull) {
       this.projectIndex = 0;
     }
 
     this.projectIndex++;
     return this.http.get<ResponseProject>(
-      `${URL}/projects/?paginate=${this.projectIndex}`
+      `${URL}/projects/?paginate=${this.projectIndex}&userId=${userId}`
     );
   }
 

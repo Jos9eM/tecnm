@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProjectsService } from 'src/app/services/projects.service';
-import { Project, ProjectType } from '../../../../app/interfaces/interfaces';
+import { UserService } from 'src/app/services/user.service';
+import { Project, ProjectType, User } from '../../../../app/interfaces/interfaces';
 
 @Component({
   selector: 'app-research-products',
@@ -11,6 +12,7 @@ import { Project, ProjectType } from '../../../../app/interfaces/interfaces';
 export class ResearchProductsPage implements OnInit {
   projects: Project[] = [];
   enabled = true;
+  user: User = {};
 
   buttons: ProjectType[] = [
     {
@@ -62,10 +64,13 @@ export class ResearchProductsPage implements OnInit {
 
   constructor(
     private router: Router,
-    private projectService: ProjectsService
+    private projectService: ProjectsService,
+    private userService: UserService,
   ) {}
 
   ngOnInit() {
+    this.user = this.userService.getUser();
+
     this.nextProjects(null, true);
 
     this.projectService.newProject.subscribe((project) => {
@@ -87,7 +92,9 @@ export class ResearchProductsPage implements OnInit {
   }
 
   nextProjects(event?, pull: boolean = false) {
-    this.projectService.getProjects(pull).subscribe((response) => {
+    console.log(this.user);
+        // eslint-disable-next-line no-underscore-dangle
+    this.projectService.getProjects(pull, this.user._id).subscribe((response) => {
       console.log(response);
       this.projects.push(...response.projects);
 
