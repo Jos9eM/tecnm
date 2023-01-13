@@ -92,7 +92,7 @@ export class ResearchProductsPage implements OnInit {
   }
 
   nextProjects(event?, pull: boolean = false) {
-    console.log(this.user);
+    //console.log(this.user);
         // eslint-disable-next-line no-underscore-dangle
     this.projectService.getProjects(pull, this.user._id).subscribe((response) => {
       console.log(response);

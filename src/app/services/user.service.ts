@@ -46,6 +46,14 @@ export class UserService {
     });
   }
 
+  //LOGOUT
+  logout() {
+    this.token = null;
+    this.user = null;
+    this.storage.clear();
+    this.navController.navigateRoot('login', {animated: true});
+  }
+
   //UPDATE USER
   updateUser(user: User) {
     const headers = new HttpHeaders({
@@ -88,6 +96,8 @@ export class UserService {
   async saveToken(token: string) {
     this.token = token;
     await this.storage.set('token', token);
+
+    await this.validateToken();
   }
 
   async loadToken() {

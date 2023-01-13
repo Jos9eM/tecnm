@@ -3,6 +3,7 @@ import { ToastController } from '@ionic/angular';
 import { NgForm } from '@angular/forms';
 import { User } from 'src/app/interfaces/interfaces';
 import { UserService } from 'src/app/services/user.service';
+import { ProjectsService } from 'src/app/services/projects.service';
 
 @Component({
   selector: 'app-profile',
@@ -14,7 +15,8 @@ export class ProfilePage implements OnInit {
 
   constructor(
     private userService: UserService,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private projectService: ProjectsService
   ) {}
 
   ngOnInit() {
@@ -35,7 +37,10 @@ export class ProfilePage implements OnInit {
     }
   }
 
-  logout() {}
+  logout() {
+    this.projectService.projectIndex = 0;
+    this.userService.logout();
+  }
 
   async presentToast(messageToast: string) {
     const toast = await this.toastController.create({
